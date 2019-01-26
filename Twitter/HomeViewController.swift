@@ -26,7 +26,8 @@ class HomeTableViewController: UITableViewController {
     
     @objc func loadTweetTable(){
         let url = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        TwitterAPICaller.client?.getDictionariesRequest(url: url, parameters: ["count" : numberOfTweets], success: { (tweets: [NSDictionary]) in
+        let myParameters: [String:Any] = ["count" : numberOfTweets]
+        TwitterAPICaller.client?.getDictionariesRequest(url: url, parameters: myParameters, success: { (tweets: [NSDictionary]) in
             self.tweetArray.removeAll()
             for tweet in tweets {
                 self.tweetArray.append(tweet)
@@ -42,8 +43,8 @@ class HomeTableViewController: UITableViewController {
     @objc func loadMoreTweet(){
         numberOfTweets = numberOfTweets + 20
         let url = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        
-        TwitterAPICaller.client?.getDictionariesRequest(url: url, parameters: ["count": numberOfTweets], success: { (tweets: [NSDictionary]) in
+        let myParameters: [String:Any] = ["count": numberOfTweets]
+        TwitterAPICaller.client?.getDictionariesRequest(url: url, parameters: myParameters, success: { (tweets: [NSDictionary]) in
             self.tweetArray.removeAll()
             for tweet in tweets {
                 self.tweetArray.append(tweet)
